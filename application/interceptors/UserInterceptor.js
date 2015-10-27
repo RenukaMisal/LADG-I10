@@ -9,9 +9,9 @@ var express = require("express");
 // Logger
 var logger = log4js.getLogger('UserInterceptor');
 
-// Exposed Routes
-var router = express.Router();
-router.get("/user/render*", userInterceptor);
+//// Exposed Routes
+//var router = express.Router();
+//router.get("/user/render*", userInterceptor);
 
 //
 // Request Interceptor: For User Requests
@@ -25,4 +25,6 @@ function userInterceptor(req, res, next) {
 }
 
 // Interface
-module.exports = router;
+module.exports = {
+	userInterceptor:userInterceptor
+};

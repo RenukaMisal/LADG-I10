@@ -1,5 +1,5 @@
 {
-  "name": "DoGood CMS",
+  "name": "DoGood-CMS",
   "version": "0.0.1",
   "description": "LetsAllDoGood - CMS",
   "main": "app.js",
@@ -22,6 +22,6 @@
     "mongoose": "~4.0.5",
     "underscore": "~1.8.3",
     "strip-json-comments": "~1.0.2",
-    "joi": "~6.5.0"
+    "joi": "^6.5.0"
   }
 }

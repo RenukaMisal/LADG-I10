@@ -16,11 +16,11 @@ var USER = app.db.getModel('USER');
 //
 // Create New User
 //
-exports.createUser = function(userObj, callback) {
+function createUser (userObj, callback) {
 
 	//Check User Object
 
-	log.debug("Creating New User: %s", JSON.stringify(userObj));
+	logger.debug("Creating New User: %s", JSON.stringify(userObj));
 
 	try{
 		var user = new USER(userObj);
@@ -52,6 +52,10 @@ function fetchUser(email, callback){
 			callback(null, user);
 		});
 	}
+	catch(e){
+		logger.error("Exception", e);
+		callback("Exception", null);
+	}
 }
 
 //
@@ -68,6 +72,7 @@ function fetchAllUsers(cb) {
 
 // Interface
 module.exports = {
+	createUser:createUser,
 	fetchUser:fetchUser,
 	fetchAllUsers: fetchAllUsers
 }
