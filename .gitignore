@@ -1,5 +1,10 @@
 # Logs
 *.log
 
+#IDE files
+.idea
+
 # Node Modules
 node_modules
+
+
