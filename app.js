@@ -72,6 +72,7 @@ log4js.configure(loggerConfig);
 var dbFactory = require('./framework/DBFactory');
 var serviceFactory = require('./framework/ServiceFactory');
 var interceptorFactory = require('./framework/InterceptorFactory');
+var responseFactory = require('./framework/ResponseFactory');
 var controllerFactory = require('./framework/ControllerFactory');
 
 
@@ -184,6 +185,12 @@ app.services.initialize(servicePath);
 app.interceptors = interceptorFactory;
 app.interceptors.initialize(interceptorPath, interceptorRoutesPath);
 
+
+/**
+ * Initialize Response Handler
+ * global.app.response: Is a reference to the Response Factory.
+ * */
+app.resHandler = responseFactory;
 
 //
 // Initialize All Controllers. Mount All Routes to Respective Controller Methods.

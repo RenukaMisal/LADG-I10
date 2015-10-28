@@ -27,7 +27,7 @@ function createUser (userObj, callback) {
 		user.save();
 		callback(null,user._id);
 	}catch(e){
-		logger.error("Exception " , e.toString);
+		logger.error("Exception " , e);
 		callback("Exception", null);
 	}
 

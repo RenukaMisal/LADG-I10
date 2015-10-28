@@ -1,28 +1,26 @@
-//
-// User Controller
-//
+ /**
+  * LetAllDoGood : UserController.
+  * @author raunak, Mindstix Software Labs.
+  */
 
-// Dependencies
+/* Dependencies*/
 var log4js = require('log4js'); 
-var express = require("express");
 var path = require('path');
 var util = require('util');
-var Joi = require('joi');
 
-// Logger
+/* Logger */
 var logger = log4js.getLogger('UserController');
 
-// Service Dependencies
+/* Service Dependencies*/
 var userService = global.app.services.getService("User");
 
-// Exposed Routes
-//var router = express.Router();
-//router.post("/user", this.createUser);
+/*Response Handler*/
+var resHandler =  global.app.resHandler;
 
 /**
  * REST API to Create User
  * */
-function createUser(req, res, next) {
+function createUser(req, res) {
 
 	/*Request Trace*/
 	logger.debug("Req UUID: " + req.uuid);
@@ -36,59 +34,16 @@ function createUser(req, res, next) {
 		if(err){
 			logger.error("Error while creating user", err);
 			res.send("Failed");
+			resHandler.sendServerError(res, Failed);
 			return;
 		}
 		logger.info("User created successfully. User Id :", user);
-		res.send("Success");
+//		res.send("Success");
+		resHandler.sendSuccess(res, "Success");
 	});
 }
 
-//
-// REST API: Fetch All Users
-//
-function fetchAllUsers(req, res, next) {
-
-	// Request Trace
-	logger.debug("Sign Up: Req UUID: " + req.uuid);
-	logger.debug("Sign Up: Device Type" + JSON.stringify(req.device));
-	logger.debug("Cookies: " + util.inspect(req.cookies));
-	logger.debug("Body: " + util.inspect(req.body));
-
-	// Delegate to Service
-	userService.fetchAllUsers(function cb(users){
-
-		// Generate REST Response
-		res.json(users);
-		return;		
-
-	});
-
-}
-
-//
-// Render View: All Users
-//
-function renderAllUsers(req, res, next) {
-
-	// Request Trace
-	logger.debug("Sign Up: Req UUID: " + req.uuid);
-	logger.debug("Sign Up: Device Type" + JSON.stringify(req.device));
-	logger.debug("Cookies: " + util.inspect(req.cookies));
-	logger.debug("Body: " + util.inspect(req.body));
-
-	// Delegate to Service
-	userService.fetchAllUsers(function cb(users) {
-
-		// Render view
-		res.render("users", {"userList": users});
-		return;		
-
-	});
-
-}
-
-// Interface
-//module.exports = router;
+/* Interface */
 module.exports = {
 	"createUser":createUser
 }
